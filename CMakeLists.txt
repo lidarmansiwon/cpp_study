@@ -16,7 +16,7 @@ add_executable(talker src/cpp_basic_pub.cpp)
 ament_target_dependencies(talker rclcpp std_msgs mk3_msgs)
 
 add_executable(listener src/cpp_basic_sub.cpp)
-ament_target_dependencies(listener rclcpp std_msgs)
+ament_target_dependencies(listener rclcpp std_msgs mk3_msgs)
 
 install(TARGETS
   talker
