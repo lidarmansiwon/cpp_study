@@ -12,10 +12,10 @@ find_package(std_msgs REQUIRED)     # ''
 find_package(mk3_msgs REQUIRED)
 
 
-add_executable(talker src/cpp_basic_pub.cpp)
+add_executable(talker src/basic_pub_sub/cpp_basic_pub.cpp)
 ament_target_dependencies(talker rclcpp std_msgs mk3_msgs)
 
-add_executable(listener src/cpp_basic_sub.cpp)
+add_executable(listener src/basic_pub_sub/cpp_basic_sub.cpp)
 ament_target_dependencies(listener rclcpp std_msgs mk3_msgs)
 
 install(TARGETS
