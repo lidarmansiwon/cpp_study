@@ -18,9 +18,15 @@ ament_target_dependencies(talker rclcpp std_msgs mk3_msgs)
 add_executable(listener src/basic_pub_sub/cpp_basic_sub.cpp)
 ament_target_dependencies(listener rclcpp std_msgs mk3_msgs)
 
+add_executable(implicit_cast src/cpp_do_it/chapter.02/implicit_cast.cpp)
+add_executable(operator_precedence src/cpp_do_it/chapter.02/operator_precedence.cpp)
+
+
 install(TARGETS
   talker
   listener
+  implicit_cast
+  operator_precedence
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
