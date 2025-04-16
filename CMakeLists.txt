@@ -18,15 +18,23 @@ ament_target_dependencies(talker rclcpp std_msgs mk3_msgs)
 add_executable(listener src/basic_pub_sub/cpp_basic_sub.cpp)
 ament_target_dependencies(listener rclcpp std_msgs mk3_msgs)
 
+## Chapter.2
 add_executable(implicit_cast src/cpp_do_it/chapter.02/implicit_cast.cpp)
 add_executable(operator_precedence src/cpp_do_it/chapter.02/operator_precedence.cpp)
 
 
+## Chapter.3
+add_executable(pointer src/cpp_do_it/chapter.03/pointer.cpp)
+
 install(TARGETS
+  ## ROS2
   talker
   listener
+  ## Chapter.2
   implicit_cast
   operator_precedence
+  ## Chapter.3
+  pointer
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
