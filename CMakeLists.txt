@@ -25,6 +25,9 @@ add_executable(operator_precedence src/cpp_do_it/chapter.02/operator_precedence.
 
 ## Chapter.3
 add_executable(pointer src/cpp_do_it/chapter.03/pointer.cpp)
+add_executable(new_and_delete src/cpp_do_it/chapter.03/new_and_delete.cpp)
+add_executable(function_ src/cpp_do_it/chapter.03/function.cpp)
+
 
 install(TARGETS
   ## ROS2
@@ -33,8 +36,11 @@ install(TARGETS
   ## Chapter.2
   implicit_cast
   operator_precedence
+  
   ## Chapter.3
   pointer
+  new_and_delete
+  function_
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
