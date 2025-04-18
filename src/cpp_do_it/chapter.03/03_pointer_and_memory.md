@@ -1,4 +1,4 @@
-# <span style="color:green">03-1 포인터와 메모리<span>
+# <span style="color:green">03-1 포인터와 메모리</span>
 
 
 C와 C++ 언어에서 가장 강력한 도구로는 대표적으로 포인터가 뽑힌다.
@@ -43,7 +43,9 @@ cout << "char_pointer:" << *char_pointer << endl; # *(역참조 연산자)
 - **포인터를 역참조하기 전에 포인터가 유효한 메모리를 가리키는지** 확인이 필수
 - 유효하지 않은 메모리를 가리키는 포인터를 역참조하려고 하면 위 오류나 런타임 오류가 발생할 수 있음
 
-# <span style="color:green">03-2 함수와 구조체<span>
+<span style="color:green">03-2 함수와 구조체</span>
+
+# <span style="color:green">03-2 함수와 구조체</span>
 - function은 특정 작업을 수행하는 코드 집합
 - 기본적인 구성
 ```
