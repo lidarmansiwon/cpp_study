@@ -28,6 +28,7 @@ add_executable(pointer src/cpp_do_it/chapter.03/pointer.cpp)
 add_executable(new_and_delete src/cpp_do_it/chapter.03/new_and_delete.cpp)
 add_executable(function_ src/cpp_do_it/chapter.03/function.cpp)
 add_executable(argument_structure src/cpp_do_it/chapter.03/argument_structure.cpp)
+add_executable(static_variable_1 src/cpp_do_it/chapter.03/static_variable_1.cpp)
 
 
 install(TARGETS
@@ -43,6 +44,7 @@ install(TARGETS
   new_and_delete
   function_
   argument_structure
+  static_variable_1
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
