@@ -36,14 +36,12 @@ cout << "char_pointer:" << *char_pointer << endl; # *(역참조 연산자)
 
 - 동적 할당 메모리 해제 이유: 함수의 매개변수나 지역변수처럼 대부분의 일반 변수는 Stack에 메모리가 할당되고 함수의 호출과 함께 할당되며 반환되면 자동으로 소멸함. 하지만 동적 할당 변수는 Heap이라는 메모리 영역에 존재하며 계속 유지됨. 메모리 영역도 훨씬 큼
 
-
-- <span style="background-color:#fff5b1"> **segmentation fault**  </span>
-- span style="background-color:#fff5b1">프로그램이 허용되지 않은 메모리 영역에 접근을 시도하거나, 허용되지 않은 방법으로 메모리 영역제 접근을 시도할 때 발생</span>
+- {\color{#5ad7b7}**segmentation fault**}
+- 프로그램이 허용되지 않은 메모리 영역에 접근을 시도하거나, 허용되지 않은 방법으로 메모리 영역제 접근을 시도할 때 발생
 
 - **포인터를 역참조하기 전에 포인터가 유효한 메모리를 가리키는지** 확인이 필수
 - 유효하지 않은 메모리를 가리키는 포인터를 역참조하려고 하면 위 오류나 런타임 오류가 발생할 수 있음
 
-<span style="color:green">03-2 함수와 구조체</span>
 
 # <span style="color:green">03-2 함수와 구조체</span>
 - function은 특정 작업을 수행하는 코드 집합
