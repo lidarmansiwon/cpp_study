@@ -27,6 +27,7 @@ add_executable(operator_precedence src/cpp_do_it/chapter.02/operator_precedence.
 add_executable(pointer src/cpp_do_it/chapter.03/pointer.cpp)
 add_executable(new_and_delete src/cpp_do_it/chapter.03/new_and_delete.cpp)
 add_executable(function_ src/cpp_do_it/chapter.03/function.cpp)
+add_executable(argument_structure src/cpp_do_it/chapter.03/argument_structure.cpp)
 
 
 install(TARGETS
@@ -41,6 +42,7 @@ install(TARGETS
   pointer
   new_and_delete
   function_
+  argument_structure
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()

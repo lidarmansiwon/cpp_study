@@ -30,7 +30,7 @@ void change_negative_pointer(int *_val) // 매개 변수가 포인터 변수로 
 }
 
 // 배열을 매개 변수로 사용하기
-int average(int _array[], int _count)
+int average(int *_array, int _count)
 {
     int sum = 0;
     for (int i = 0; i < _count; i++)
