@@ -29,6 +29,8 @@ add_executable(new_and_delete src/cpp_do_it/chapter.03/new_and_delete.cpp)
 add_executable(function_ src/cpp_do_it/chapter.03/function.cpp)
 add_executable(argument_structure src/cpp_do_it/chapter.03/argument_structure.cpp)
 add_executable(static_variable_1 src/cpp_do_it/chapter.03/static_variable_1.cpp)
+add_executable(call_by_value src/cpp_do_it/chapter.03/call_by_value.cpp)
+add_executable(final_exam src/cpp_do_it/chapter.03/final_exam.cpp)
 
 
 install(TARGETS
@@ -45,6 +47,8 @@ install(TARGETS
   function_
   argument_structure
   static_variable_1
+  call_by_value
+  final_exam
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
