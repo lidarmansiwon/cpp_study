@@ -32,6 +32,10 @@ add_executable(static_variable_1 src/cpp_do_it/chapter.03/static_variable_1.cpp)
 add_executable(call_by_value src/cpp_do_it/chapter.03/call_by_value.cpp)
 add_executable(final_exam src/cpp_do_it/chapter.03/final_exam.cpp)
 
+## Chapter.4
+add_executable(switch src/cpp_do_it/chapter.04/switch.cpp)
+add_executable(final_04 src/cpp_do_it/chapter.04/final_04.cpp)
+
 
 install(TARGETS
   ## ROS2
@@ -49,6 +53,11 @@ install(TARGETS
   static_variable_1
   call_by_value
   final_exam
+
+  ## Chapter.4
+  switch
+  final_04
+
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
