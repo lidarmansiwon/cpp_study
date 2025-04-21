@@ -36,6 +36,11 @@ add_executable(final_exam src/cpp_do_it/chapter.03/final_exam.cpp)
 add_executable(switch src/cpp_do_it/chapter.04/switch.cpp)
 add_executable(final_04 src/cpp_do_it/chapter.04/final_04.cpp)
 
+## Chatper.5
+add_executable(try_throw_catch_1 src/cpp_do_it/chapter.05/try_throw_catch_1.cpp)
+add_executable(assert src/cpp_do_it/chapter.05/assert.cpp)
+
+
 
 install(TARGETS
   ## ROS2
@@ -57,6 +62,10 @@ install(TARGETS
   ## Chapter.4
   switch
   final_04
+
+  ## Chapter.5
+  try_throw_catch_1
+  assert
 
   DESTINATION lib/${PROJECT_NAME})
 
