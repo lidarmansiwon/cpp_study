@@ -14,7 +14,15 @@ C++ 언어와 ROS 2 C++ 프로그래밍을 함께 공부하는 저장소입니�
     │   └── cpp_basic_sub.cpp        # ROS2 Subscriber 기본 예제
     └── cpp_do_it
         └── chapter.02
-            └── implicit_cast.cpp    # C++ 기초: 형 변환 (암시적 캐스팅) 실습
+            └── 변수와 연산자
+        └── chapter.03
+            └── 포인터와 메모리 구조
+        └── chapter.04
+            └── 실행 흐름 제어
+        └── chapter.05
+            └── 예외처리
+        └── chapter.06
+            └── 객체지향과 클래스
 ```
 - `cpp_do_it/` : 📖 **C++ 완전 정복** 책 실습 코드 저장
 - `basic_pub_sub/` : 🌐 ROS 2 기본 Publish / Subscribe 예제 코드
