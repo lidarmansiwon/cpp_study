@@ -41,6 +41,7 @@ add_executable(try_throw_catch_1 src/cpp_do_it/chapter.05/try_throw_catch_1.cpp)
 add_executable(assert src/cpp_do_it/chapter.05/assert.cpp)
 add_executable(final_05 src/cpp_do_it/chapter.05/final_05.cpp)
 add_executable(final_05_ref src/cpp_do_it/chapter.05/final_05_ref.cpp)
+add_executable(final_05_2 src/cpp_do_it/chapter.05/final_05_2.cpp)
 
 
 
@@ -69,6 +70,7 @@ install(TARGETS
   try_throw_catch_1
   assert
   final_05
+  final_05_2
   final_05_ref
 
   DESTINATION lib/${PROJECT_NAME})
