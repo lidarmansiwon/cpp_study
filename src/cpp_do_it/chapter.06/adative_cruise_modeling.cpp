@@ -1,11 +1,17 @@
 #include <iostream>
-#include <studio.h>
+#include <stdlib.h>
 #ifdef _WIN32
 #include <Windows.h>
 #else
 #include <unistd.h>
 #endif
 #include <cstdlib>
+
+// 운영체제에 따라 다른 헤더를 포함하는 부분.
+// #ifdef _WIN32는 현재 운영체제가 Windows인지 확인.
+// Windows이면 Windows.h를 포함.
+// 아니면(unix 계열이면) unistd.h를 포함.
+// 이 구조는 플랫폼에 따라 sleep 같은 기능을 다르게 구현할 때 자주 사용
 
 using namespace std;
 
