@@ -43,6 +43,12 @@ add_executable(final_05 src/cpp_do_it/chapter.05/final_05.cpp)
 add_executable(final_05_ref src/cpp_do_it/chapter.05/final_05_ref.cpp)
 add_executable(final_05_2 src/cpp_do_it/chapter.05/final_05_2.cpp)
 
+## Chapter.6
+add_executable(adative_cruise_modeling src/cpp_do_it/chapter.06/adative_cruise_modeling.cpp)
+
+## Chapter.7
+add_executable(bank src/cpp_do_it/chapter.07/bank.cpp)
+
 
 
 install(TARGETS
@@ -72,6 +78,12 @@ install(TARGETS
   final_05
   final_05_2
   final_05_ref
+
+  ## Chapter.6
+  adative_cruise_modeling
+
+  ## Chapter.7
+  bank
 
   DESTINATION lib/${PROJECT_NAME})
 
