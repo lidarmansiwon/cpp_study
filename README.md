@@ -23,6 +23,11 @@ C++ 언어와 ROS 2 C++ 프로그래밍을 함께 공부하는 저장소입니�
             └── 예외처리
         └── chapter.06
             └── 객체지향과 클래스
+        └── chapter.07
+            └── 
+        └── chapter.08
+            └── 
+
 ```
 - `cpp_do_it/` : 📖 **C++ 완전 정복** 책 실습 코드 저장
 - `basic_pub_sub/` : 🌐 ROS 2 기본 Publish / Subscribe 예제 코드
