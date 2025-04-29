@@ -48,6 +48,8 @@ add_executable(adative_cruise_modeling src/cpp_do_it/chapter.06/adative_cruise_m
 
 ## Chapter.7
 add_executable(bank src/cpp_do_it/chapter.07/bank.cpp)
+add_executable(monster_class src/cpp_do_it/chapter.07/monster_class.cpp)
+add_executable(monster_with_parameter src/cpp_do_it/chapter.07/monster_with_parameter.cpp)
 
 
 
@@ -84,6 +86,8 @@ install(TARGETS
 
   ## Chapter.7
   bank
+  monster_class
+  monster_with_parameter
 
   DESTINATION lib/${PROJECT_NAME})
 
