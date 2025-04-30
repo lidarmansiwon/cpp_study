@@ -40,7 +40,7 @@ C++ 언어와 ROS 2 C++ 프로그래밍을 함께 공부하는 저장소입니�
 ### 1. colcon 빌드
 
 ```bash
-cd ~/ros2_ws  # 작업 중인 ROS2 워크스페이스
+cd ~/study_ws  # 작업 중인 ROS2 워크스페이스
 colcon build --packages-select cpp_study
 source install/setup.bash
 
