@@ -50,6 +50,8 @@ add_executable(adative_cruise_modeling src/cpp_do_it/chapter.06/adative_cruise_m
 add_executable(bank src/cpp_do_it/chapter.07/bank.cpp)
 add_executable(monster_class src/cpp_do_it/chapter.07/monster_class.cpp)
 add_executable(monster_with_parameter src/cpp_do_it/chapter.07/monster_with_parameter.cpp)
+add_executable(initialize_member_variables src/cpp_do_it/chapter.07/initialize_member_variables.cpp)
+# ament_target_dependencies(initialize_member_variables monster_class)
 
 
 
@@ -88,6 +90,7 @@ install(TARGETS
   bank
   monster_class
   monster_with_parameter
+  initialize_member_variables
 
   DESTINATION lib/${PROJECT_NAME})
 
