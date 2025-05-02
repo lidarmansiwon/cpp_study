@@ -76,7 +76,8 @@ int main() {
     first_mon.set_type("수수께끼 몬스터");
     first_mon.set_location(30, 30);
 
-    monster_k second_mon(first_player);
+    // monster_k second_mon(first_player);
+    monster_k second_mon = first_mon;
     second_mon.set_quiz("문이 뒤집어 지면 무엇이 될까?");
     second_mon.set_location(45, 50);
 
