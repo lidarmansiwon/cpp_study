@@ -1,6 +1,12 @@
 # 📘 cpp_study
 
 C++ 언어와 ROS 2 C++ 프로그래밍을 함께 공부하는 저장소입니다.  
+공부하며 작성한 소스 코드들을 저장해놓았습니다. 
+공부하며 작성한 이론 정리들은 아래 블로그에 모두 저장되어있습니다. 
+
+https://lidarmansiwon.tistory.com/category/%EA%B0%9C%EB%B0%9C%20%EC%96%B8%EC%96%B4/C%2B%2B
+
+
 - **C++ 기초부터 심화까지** : "C++ 완전 정복" 책 기반으로 실습
 - **ROS 2 C++ 프로그래밍** : Publisher / Subscriber 등 ROS2 핵심 코드 학습
 
