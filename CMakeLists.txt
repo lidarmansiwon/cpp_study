@@ -52,6 +52,7 @@ add_executable(monster_class src/cpp_do_it/chapter.07/monster_class.cpp)
 add_executable(monster_with_parameter src/cpp_do_it/chapter.07/monster_with_parameter.cpp)
 add_executable(initialize_member_variables src/cpp_do_it/chapter.07/initialize_member_variables.cpp)
 add_executable(liskov_principle_destructor src/cpp_do_it/chapter.07/liskov_principle_destructor.cpp)
+add_executable(funtion_overload src/cpp_do_it/chapter.07/funtion_overload.cpp)
 
 
 
@@ -92,6 +93,7 @@ install(TARGETS
   monster_with_parameter
   initialize_member_variables
   liskov_principle_destructor
+  funtion_overload
 
   DESTINATION lib/${PROJECT_NAME})
 
