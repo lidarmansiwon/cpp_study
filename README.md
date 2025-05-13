@@ -14,6 +14,7 @@ https://lidarmansiwon.tistory.com/category/%EA%B0%9C%EB%B0%9C%20%EC%96%B8%EC%96%
 
 - **C++ 기초부터 심화까지** : "C++ 완전 정복" 책 기반으로 실습
 - **ROS 2 C++ 프로그래밍** : Publisher / Subscriber 등 ROS2 핵심 코드 학습
+- **C++ GNC SYSTEM
 
 ---
 
