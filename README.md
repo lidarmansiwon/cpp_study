@@ -61,3 +61,5 @@ source install/setup.bash
 
 # 또는 build 디렉토리에서 바로 실행
 ./build/cpp_study/implicit_cast
+./
+
