@@ -11,6 +11,12 @@ find_package(rclcpp REQUIRED)       # 이는 패키지를 빌드할 때 이 두 
 find_package(std_msgs REQUIRED)     # ''
 find_package(mk3_msgs REQUIRED)
 
+## 표운석 박사님 ROS2로 시작하는 로봇 프로그래밍 강좌 공부
+find_package(msg_srv_action_interface_example REQUIRED)
+find_package(rclcpp_action REQUIRED)
+##
+
+include_directories(include)
 
 add_executable(talker src/basic_pub_sub/cpp_basic_pub.cpp)
 ament_target_dependencies(talker rclcpp std_msgs mk3_msgs)
