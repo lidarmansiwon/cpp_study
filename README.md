@@ -45,6 +45,7 @@ https://lidarmansiwon.tistory.com/category/%EA%B0%9C%EB%B0%9C%20%EC%96%B8%EC%96%
 - `basic_pub_sub/` : 🌐 ROS 2 기본 Publish / Subscribe 예제 코드
 - 표운석, ROS2(Robot Operation System) C++ 기본 예제 공부
 - 앞으로 다른 ROS 2 예제 및 C++ 심화 예제들도 이 구조로 추가 예정!
+- GNC 시스템을 C++로 구축 중. 
 
 ---
 
