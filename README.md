@@ -46,6 +46,7 @@ https://lidarmansiwon.tistory.com/category/%EA%B0%9C%EB%B0%9C%20%EC%96%B8%EC%96%
 - 표운석, ROS2(Robot Operation System) C++ 기본 예제 공부
 - 앞으로 다른 ROS 2 예제 및 C++ 심화 예제들도 이 구조로 추가 예정!
 - GNC 시스템을 C++로 구축 중. 
+- 5/21 논문 작성 및 랩미팅 준비로 인한 야근 --> 3장 복습
 
 ---
 
