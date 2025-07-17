@@ -52,8 +52,45 @@ double AA_SIPP::getHValue(int i, int j)
 
 double AA_SIPP::getRCost(double headingA, double headingB)
 {
+    // if(config->planforturns)
+    //     return std::min(360 - fabs(headingA - headingB), fabs(headingA - headingB))/(curagent.rspeed*180.0);
+    // else
+    //     return 0;
     if(config->planforturns)
-        return std::min(360 - fabs(headingA - headingB), fabs(headingA - headingB))/(curagent.rspeed*180.0);
+    {
+        double angle = std::min(360 - fabs(headingA - headingB),
+                                fabs(headingA - headingB)); 
+        double cost = 0.0;
+        if(angle <= 10.0) {
+            // 기존 선형
+            cost = angle / (curagent.rspeed * 180.0);
+        } 
+        else if(angle <= 20.0) {
+            // 기존 선형
+            cost = angle / (curagent.rspeed * 180.0) * 2.0;
+        } 
+        else if(angle <= 30.0) {
+            // 기존 선형
+            cost = angle / (curagent.rspeed * 180.0) * 4.0;
+        } 
+        else if(angle <= 40.0) {
+            // 기존 선형
+            cost = angle / (curagent.rspeed * 180.0) * 8.0;
+        } 
+        else if(angle <= 50.0) {
+            // 기존 선형
+            cost = angle / (curagent.rspeed * 180.0) * 16.0;
+        } 
+        else if(angle <= 80.0) {
+            // 기존 선형
+            cost = angle / (curagent.rspeed * 180.0) * 40.0;
+        } 
+        else {
+            // 예) 50도 이상의 회전에 대해 2배로 페널티 강화
+            cost = angle / (curagent.rspeed * 180.0) * 80.0;
+        }
+        return cost;
+    }
     else
         return 0;
 }
@@ -68,20 +105,71 @@ double AA_SIPP::calcHeading(const Node &node, const Node &son)
 
 std::list<Node> AA_SIPP::findSuccessors(const Node curNode, const Map &map)
 {
-    Node newNode, angleNode;
-    std::list<Node> successors;
-    std::vector<double> EAT;
-    std::vector<SafeInterval> intervals;
-    double h_value;
+    Node newNode, angleNode; // newNode : 새로운 후속 노드를 저장하기 위한 변수, angleNode : 각도와 관련된 후속 노드를 위한 변수. 
+    std::list<Node> successors; // successors: 후속 노드를 저장하는 리스트.
+    std::vector<double> EAT; // EAT: 예상 경로 시간을 저장할 벡터
+    std::vector<SafeInterval> intervals; // intervals: 안전 구간(SafeIntervals) 을 계산하여 저장할 벡터.
+    double h_value; // h_value: 후속 노드의 휴리스틱 값을 저장할 변수.
     auto parent = &(close.find(curNode.i*map.width + curNode.j)->second);
-    std::vector<Node> moves = map.getValidMoves(curNode.i, curNode.j, config->connectedness, curagent.size);
-    for(auto m:moves)
-        if(lineofsight.checkTraversability(curNode.i + m.i,curNode.j + m.j,map))
+
+    if(curNode.j < 44.0)
+    {
+        curagent.size = 1;
+        lineofsight.setSize(curagent.size);
+        // std::cout << curNode.i << "ddd"<< curagent.size << std::endl;
+    }
+    else{
+        curagent.size = 2;
+        lineofsight.setSize(curagent.size);
+        // std::cout << curNode.i << "ccc"<< curagent.size << std::endl;
+    }
+    
+    
+    std::vector<Node> moves = map.getValidMoves(curNode.i, curNode.j, config->connectedness, curagent.size); // moves: 가능한 이동 방향들을 얻기 위한 함수 호출. map.getValidMoves() 함수는 현재 위치에서 이동할 수 있는 유효한 방향을 반환
+    double angle_difference;
+    // std::cout << "1" << std::endl;
+    for(auto m:moves)  // moves 벡터에서 하나씩 꺼내어 가능한 이동을 확인
+        if(lineofsight.checkTraversability(curNode.i + m.i,curNode.j + m.j,map))  // lineofsight.checkTraversability는 이동하려는 위치가 장애물이 없는지, 이동할 수 있는지 확인
         {
+            // 새로운 노드 정보 업데이트
             newNode.i = curNode.i + m.i;
             newNode.j = curNode.j + m.j;
+            constraints->setSize(curagent.size);
             constraints->updateCellSafeIntervals({newNode.i,newNode.j});
+            // std::cout << "4" << std::endl;
+
             newNode.heading = calcHeading(curNode, newNode);
+
+            // **(추가) 회전각 50도 제한 적용** ------------------------------ //
+            {
+                // double oldHeading = curNode.heading;  // 부모 노드의 heading
+                // double newHeading = newNode.heading;
+                // double turn = fabs(newHeading - oldHeading);
+                // std::cout<< "angle: " << turn << "new: "<< newHeading << "old: "<< oldHeading<< "\n"<< std::endl;
+                // // (예: 350도 - 10도 = 340도, 실제로는 20도 회전)
+                // if(turn > 180.0)
+                //     turn = 360.0 - turn;
+
+                // // std::cout<< "angle: " << turn << "\n"<< std::endl;
+                // // // 50도 초과면 무효 처리
+                // if(turn > 50.0) {
+                //     // std::cout<< "angle: " << turn << "\n"<< std::endl;
+                //     continue; // 유효 후보에서 제외
+                // }
+                double oldHeading = curNode.heading;
+                double newHeading = newNode.heading;
+                double turn = newHeading - oldHeading;
+                while (turn > 180.0) turn -= 360.0;
+                while (turn < -180.0) turn += 360.0;
+
+                // std::cout << "turn: " << turn << ", abs(turn): " << fabs(turn)
+                //         << ", new: " << newHeading << ", old: " << oldHeading << std::endl;
+
+                if (fabs(turn) > 50.0) {
+                    continue; // 50도 초과면 유효 후보 제외
+}
+            }
+            
             angleNode = curNode; //the same state, but with extended g-value
             angleNode.g += getRCost(angleNode.heading, newNode.heading) + config->additionalwait;//to compensate the amount of time required for rotation
             newNode.g = angleNode.g + m.g/curagent.mspeed;
@@ -100,6 +188,7 @@ std::list<Node> AA_SIPP::findSuccessors(const Node curNode, const Map &map)
                     successors.push_front(newNode);
                 }
             }
+            
             if(config->allowanyangle)
             {
                 newNode = resetParent(newNode, curNode, map);
@@ -300,13 +389,9 @@ bool AA_SIPP::changePriorities(int bad_i)
     }
 }
 
-// 핵심 함수
-// 입력 --> map: 맵정보, task: 모든 에이전트의 시작점, 목표점, 크기 등의 정보를 포함, obstacle: 동적 장애물
-// 출력 --> SearchResult: 경로 정보, 소요시간, 충돌 여부 등 결과
 SearchResult AA_SIPP::startSearch(Map &map, Task &task, DynamicObstacles &obstacles)
 {
 
-// OS에 따라서 begin에 시작 시간을 저장
 #ifdef __linux__
     timeval begin, end;
     gettimeofday(&begin, NULL);
@@ -321,18 +406,14 @@ SearchResult AA_SIPP::startSearch(Map &map, Task &task, DynamicObstacles &obstac
     priorities.clear();
     open.resize(map.height);
     setPriorities(task);
-    // 우선 순위 조합을 바꿔가며 경로를 찾음.
     do
     {
         constraints = new Constraints(map.width, map.height);
-        // 모든 동적 장애물 정보를 기반으로 경로상의 시간/공간 제약 조건 추가
         for(int k = 0; k < obstacles.getNumberOfObstacles(); k++)
         {
             constraints->addConstraints(obstacles.getSections(k), obstacles.getSize(k), obstacles.getMSpeed(k), map);
         }
-        // 경로 결과 초기화
         sresult.pathInfo.clear();
-
         sresult.pathInfo.resize(task.getNumberOfAgents());
         sresult.agents = task.getNumberOfAgents();
         sresult.agentsSolved = 0;
@@ -342,32 +423,28 @@ SearchResult AA_SIPP::startSearch(Map &map, Task &task, DynamicObstacles &obstac
         {
             curagent = task.getAgent(k);
             constraints->setParams(curagent.size, curagent.mspeed, curagent.rspeed, config->planforturns, config->inflatecollisionintervals);
+
             lineofsight.setSize(curagent.size);
-            // 에이전트가 시작점에서 대기할 수 있도록 하는 start safe interval 제약 추가
             if(config->startsafeinterval > 0)
             {
                 auto cells = lineofsight.getCells(curagent.start_i,curagent.start_j);
                 constraints->addStartConstraint(curagent.start_i, curagent.start_j, config->startsafeinterval, cells, curagent.size);
             }
         }
-        // 각 에이전트에 대해 경로 탐색 시도
         for(unsigned int numOfCurAgent = 0; numOfCurAgent < task.getNumberOfAgents(); numOfCurAgent++)
         {
             curagent = task.getAgent(current_priorities[numOfCurAgent]);
             constraints->setParams(curagent.size, curagent.mspeed, curagent.rspeed, config->planforturns, config->inflatecollisionintervals);
             lineofsight.setSize(curagent.size);
-            
-            // 시작 지점 제약 제거
             if(config->startsafeinterval > 0)
             {
                 auto cells = lineofsight.getCells(curagent.start_i, curagent.start_j);
                 constraints->removeStartConstraint(cells, curagent.start_i, curagent.start_j);
             }
             if(findPath(current_priorities[numOfCurAgent], map))
-                // 성공: 해당 경로를 다른 에이전트의 제약 조건으로 추가
                 constraints->addConstraints(sresult.pathInfo[current_priorities[numOfCurAgent]].sections, curagent.size, curagent.mspeed, map);
             else
-            {   // 실패: 이 에이전트가 경로를 못 찾았음.
+            {
                 bad_i = current_priorities[numOfCurAgent];
                 break;
             }
@@ -387,11 +464,10 @@ SearchResult AA_SIPP::startSearch(Map &map, Task &task, DynamicObstacles &obstac
         if(timespent > config->timelimit)
             break;
     } while(changePriorities(bad_i) && !solution_found);
-    // while --> 다른 우선 순위 조합으로 시도하거나 중지
+
 
 #ifdef __linux__
     gettimeofday(&end, NULL);
-    // 경과 시간 저장
     sresult.runtime = (end.tv_sec - begin.tv_sec) + static_cast<double>(end.tv_usec - begin.tv_usec) / 1000000;
 #else
     QueryPerformanceCounter(&end);
@@ -400,7 +476,6 @@ SearchResult AA_SIPP::startSearch(Map &map, Task &task, DynamicObstacles &obstac
     sresult.tries = tries;
     if(sresult.pathfound)
     {
-        // 충돌 체크(옵션)
         std::vector<conflict> confs = CheckConflicts(task);
         for(unsigned int i = 0; i < confs.size(); i++)
             std::cout<<confs[i].i<<" "<<confs[i].j<<" "<<confs[i].g<<" "<<confs[i].agent1<<" "<<confs[i].agent2<<"\n";
@@ -620,13 +695,43 @@ void AA_SIPP::makePrimaryPath(Node curNode)
     }
     for(auto it = path.begin(); it != path.end(); it++)
         hppath.push_back(*it);
+
     if(config->planforturns && curagent.goal_heading >= 0)
     {
+        // std::cout << "test" << config->planforturns << std::endl;
         Node add = hppath.back();
         add.heading = curagent.goal_heading;
         hppath.back().g -= getRCost(hppath.back().heading, curagent.goal_heading);
         hppath.push_back(add);
     }
+
+    // if(config->planforturns && curagent.goal_heading >= 0)
+    // {
+    //     Node last = hppath.back();
+    //     double cur_x = last.i;
+    //     double cur_y = last.j;
+    //     double cur_heading = last.heading;
+    //     double goal_heading = curagent.goal_heading;
+
+    //     // (1) 한 칸 이동 (현재 heading 기준)
+    //     double rad = cur_heading * M_PI / 180.0;
+    //     int di = round(cos(rad));
+    //     int dj = round(sin(rad));
+    //     cur_x += di;
+    //     cur_y += dj;
+
+    //     Node next = last;
+    //     next.i = cur_x;
+    //     next.j = cur_y;
+    //     next.heading = cur_heading; // 아직 heading은 그대로
+    //     hppath.push_back(next);
+
+    //     // (2) 그 자리에서 heading을 목표값으로 변경
+    //     Node turn = next;
+    //     turn.heading = goal_heading;
+    //     hppath.push_back(turn);
+    // }
+
     for(unsigned int i = 1; i < hppath.size(); i++)
     {
         if((hppath[i].g - (hppath[i - 1].g + getCost(hppath[i].i, hppath[i].j, hppath[i - 1].i, hppath[i - 1].j)/curagent.mspeed)) > CN_EPSILON)
